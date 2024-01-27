@@ -10,7 +10,7 @@ function getData(form) {
     a = Object.fromEntries(formData);
     flyNum = Object.values(a);
     //console.log(flyNum[0]);
-    return flyNum[0]
+    return flyNum[0]  //returns flight number
   }
   
   document.getElementById("myForm").addEventListener("submit", function (e) {

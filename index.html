@@ -7,7 +7,7 @@
     <script src="app.js" async></script>
     <script>
         function confirmInput() {
-            flightNumber = document.forms[0].flightNumber.value;
+            fNumber = document.forms[0].fNumber.value;
             alert("Hello! You will now be redirected to your airline's predicted turbulence route!");
         }
     </script>
@@ -15,7 +15,7 @@
 </head>
 <body>
     <form id="myForm" onsubmit="confirmInput()" action="http://127.0.0.1:5500/map.html">  
-        Enter flight number:<input id="flightNumber" name="flightNumber" type="text">
+        Enter flight number:<input id="fNumber" name="flightNumber" type="text">
         <input type="submit">
     </form>
 

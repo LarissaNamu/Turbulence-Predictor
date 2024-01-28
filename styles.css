@@ -1,7 +1,12 @@
 h2 {font-family: Tahoma;}
 h3 {font-family: Tahoma;}
 h4 {font-family: Tahoma;}
-form {font-family: Tahoma;}
+
+
+form {
+    font-family: Tahoma;
+    
+}
 body {
     background-image: url("bg2.png");
     background-color: #cccccc;

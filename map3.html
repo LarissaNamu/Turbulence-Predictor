@@ -25,13 +25,13 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
 <script>
-    var set_longitude = 37.44; // set longitude for default map view
-    var set_latitude = -92.48; // set latitude for default map view
+    var set_longitude = 27.44; // set longitude for default map view
+    var set_latitude = -88.48; // set latitude for default map view
 
-    var starting_longitude = 32.9; // set longitude for starting airport
-    var starting_latitude = -97.0405; // set latitude for starting airport
-    var ending_longitude = 41.98; // set longitude for ending airport
-    var ending_latitude = -87.91; // set latitude for ending airport
+    var starting_longitude = 25.7951; // set longitude for starting airport
+    var starting_latitude = -80.2795; // set latitude for starting airport
+    var ending_longitude = 32.8984; // set longitude for ending airport
+    var ending_latitude = -97.0338; // set latitude for ending airport
 
     var map = L.map('map').setView([set_longitude, set_latitude], 6);
     
@@ -45,7 +45,7 @@
         iconSize: [30, 30], // size of the icon
     });
 
-    // flight path
+    // flight markers
     L.marker([starting_longitude, starting_latitude], {icon: greenIcon}).addTo(map).bindPopup("Starting Airport");
     L.marker([ending_longitude, ending_latitude], {icon: redIcon}).addTo(map).bindPopup("Ending Airport");
 
@@ -55,7 +55,7 @@
     [ending_longitude, ending_latitude]
     ]).addTo(map);
 
-    // airport highlight variable
+    // airport highlight variable CHANGE THIS TO CHANGE AIRPORT HIGHLIGHTS
     var Airports = {"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Polygon","coordinates":[[[-97.04792631,32.92348455],[-97.05405751,32.92229946],[-97.05538012,32.92219633],[-97.05682559,32.92228126],[-97.05759169,32.92214779],[-97.05875529,32.92015182],[-97.06032362,32.91879891],[-97.06229669,32.91785853],[-97.06349643,32.91751877],[-97.06453717,32.91739743],[-97.06728356,32.91739137],[-97.06734138,32.91702734],[-97.06749316,32.91096614],[-97.06760879,32.90748335],[-97.06802798,32.90738019],[-97.06807134,32.9057601],[-97.0712297,32.90576617],[-97.07122247,32.90315089],[-97.07163443,32.90316303],[-97.07945669,32.91075892],[-97.0793474,32.91091544],[-97.07937312,32.91109894],
     [-97.08062674,32.91232947],[-97.08209895,32.91126085],[-97.08378973,32.91293933],[-97.08618126,32.9111799],[-97.08623912,32.90910199],[-97.08594339,32.9088807],[-97.08510122,32.90801174],[-97.08231753,32.90588518],[-97.08105747,32.90527527],[-97.08070389,32.90518891],[-97.07961741,32.90408782],[-97.07851165,32.90230661],[-97.07549009,32.8994998],[-97.07240425,32.89721649],[-97.07238496,32.89705455],[-97.07215995,32.89688721],[-97.0719928,32.89689261],[-97.06559611,32.89004772],[-97.0662647,32.8897562],[-97.06701688,32.88974541],[-97.06706188,32.88629036],[-97.06251669,32.88631195],[-97.06253598,32.88707855],[-97.06139807,32.8876454],[-97.06030517,32.88858474],[-97.06018302,32.88858474],[-97.06020231,32.88739167],
     [-97.0593987,32.88737547],[-97.05941156,32.87930427],[-97.05916726,32.87827844],[-97.05905797,32.87824065],[-97.05902583,32.87807328],[-97.05912869,32.87801929],[-97.05871081,32.87695025],[-97.05817722,32.87631315],[-97.05691717,32.87541147],[-97.05611999,32.87472036],[-97.05540639,32.8726362],[-97.05446778,32.87104334],[-97.05421062,32.86911568],[-97.05254555,32.86963945],[-97.05175481,32.86976904],[-97.05097692,32.86976904],[-97.05092549,32.87003362],[-97.039405,32.86994183],[-97.03926357,32.87587041],[-97.03529697,32.87588121],[-97.0352584,32.87413723],[-97.03503982,32.87306275],[-97.03395977,32.87307355],[-97.03379262,32.87169669],[-97.03365761,32.87140511],[-97.03343903,32.87121073],[-97.03311116,32.87106494],
@@ -75,12 +75,11 @@
     slope = (ending_latitude - starting_latitude) / (ending_longitude - starting_longitude);
     multiplier = distance / 25;
     
-    turbulence_range = [25, 25, 26.25, 27.5, 28.75, 57.5, 56.25, 25, 23.75, 22.5, 22.10714286, 24.21428571, 26.32142857, 28.42857143, 29.28571429, 31.39285714, 32.25, 33.10714286, 53.96428571, 34.82142857, 35.67857143, 36.53571429, 37.39285714, 38.25];
+    turbulence_range = [9, 26.46428571, 24.82142857, 35.25, 43.17857143, 31.10714286, 16.25, 16.25, 31.25, 35, 26.25, 56, 2.5, 27.5, 25, 0, 12.5, 7.5, 20.21428571, 46.46428571, 55.21428571, 35.21428571, 22.71428571, 30.21428571];
 
     for (i = 0; i < 25; i++) {
         var lat = starting_latitude + (i * slope * multiplier);
         var long = starting_longitude + (i * multiplier);
-        
         if (long >= ending_longitude || lat >= ending_latitude) {
             break;
         }

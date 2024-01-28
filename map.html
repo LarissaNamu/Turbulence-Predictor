@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- IMPORT STUFF AND SET TITLE HERE-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turbulence Tracker</title>
+    
+    <!-- Leaflet CSS-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+    <style>
+        body { margin: 0; padding: 0; }
+        #map { width: 100%; height: 100vh; }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+</body>
+
+</html>
+
+<!-- import leaflet -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+<script>
+    var set_longitude = 51.505; // set longitude for default map view
+    var set_latitude = -0.09; // set latitude for default map view
+
+    var starting_longitude = 51.505; // set longitude for starting airport
+    var starting_latitude = -0.08; // set latitude for starting airport
+    var ending_longitude = 51.505; // set longitude for ending airport
+    var ending_latitude = -1; // set latitude for ending airport
+
+    var light_turbulence_longitude = 51.505; // set longitude for light turbulence
+    var light_turbulence_latitude = -2; // set latitude for light turbulence
+    var medium_turbulence_longitude = 51.505; // set longitude for medium turbulence
+    var medium_turbulence_latitude = -0.75; // set latitude for medium turbulence
+    var heavy_turbulence_longitude = 51.505; // set longitude for heavy turbulence
+    var heavy_turbulence_latitude = -0.9; // set latitude for heavy turbulence
+
+    var map = L.map('map').setView([set_longitude, set_latitude], 10);
+    
+    var greenIcon = L.icon({
+        iconUrl: 'starting.png',
+        iconSize:     [30, 30], // size of the icon
+    });
+
+    var redIcon = L.icon({
+        iconUrl: 'ending.png',
+        iconSize:     [30, 30], // size of the icon
+    });
+    
+    L.marker([starting_longitude, starting_latitude], {icon: greenIcon}).addTo(map).bindPopup("Starting Airport");
+    L.marker([ending_longitude, ending_latitude], {icon: redIcon}).addTo(map).bindPopup("Ending Airport");
+
+    var light_circle = L.circle([light_turbulence_longitude, light_turbulence_latitude], {radius: 5000}).addTo(map);
+    var medium_circle = L.circle([light_turbulence_longitude, light_turbulence_latitude], {radius: 5000}).addTo(map);
+    var heavy_circle = L.circle([light_turbulence_longitude, light_turbulence_latitude], {radius: 5000}).addTo(map);
+    
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
+</script>

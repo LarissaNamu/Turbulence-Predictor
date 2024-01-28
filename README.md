@@ -7,5 +7,17 @@ Frontend website - 2 pages \
 
 integrate dynamic map that traces startpoint, endpoint, path, and maps turbulence zones - uhhhhhh \
 get flight information using AA api \
-somehow calculate turbulence based on elevation, current weather, and wind sheer (?) for 20-25 mile zones along the path \
-put turbulence intensity into zones (green = good) (yellow = slight) (orange = bad enough for an announcement) (red = hold on and hope)
+Formula for the Turbulence Index:
+T=(5/4)w+(3/7)i+(1/10)e
+T = Turbulence Index
+w = wind speed
+i = weather intensity
+e = |descending elevation difference|
+
+0~56 : green
+57~145 : yellow
+146+ : red
+
+green : none to slight tremors
+yellow : turbulence present
+red : severe turbulence

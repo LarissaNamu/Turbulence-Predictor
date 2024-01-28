@@ -12,12 +12,12 @@ T=(5/4)w+(3/7)i+(1/10)e \
 T = Turbulence Index \
 w = wind speed \
 i = weather intensity \
-e = |descending elevation difference| \
+e = |descending elevation difference| 
 
-0~56 : green \
-57~145 : yellow \
-146+ : red \
+0 to 56 : green \
+57 to 145 : yellow \
+146+ : red 
 
 green : none to slight tremors \
 yellow : turbulence present \
-red : severe turbulence \
+red : severe turbulence 

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
     <script src="app.js" async></script>
     <script>
         function confirmInput() {
@@ -12,12 +13,28 @@
         }
     </script>
     
+    
 </head>
-<body>
-<form onsubmit="confirmInput()" action="http://127.0.0.1:5500/map.html">  
+<body align = "center">
+
+<img src="watermark.png" alt = "our mark">
+
+<h2>Welcome to Turbulence Predictor!</h2>
+<h3><i>For American Airlines</i></h3>
+<h4>Our inspiration for this project came from 2 of our developers' fear of airplane turbulence (ooo scary).<br>
+Many American Airlines passengers experience the discomfort of unexpected turbulence each year.<br>
+So 4 beginner developers from this year's TAMU Hack decided to take a stand and create a program that maps <br> 
+    zones in a plane's route that allows passengers to be informed about when turbulence may occur.</h4>
+
+
+<form onsubmit="confirmInput()" action="http://127.0.0.1:5500/map.html" align = "center">  
     Enter flight number:<input id="fNumber" name="flightNumber" type="text">
     <input type="submit">
 </form>
+
+<h4>Thank you for using Turbulence Predictor! We hope that our program is able to give American Airlines passengers an anxiety-free flying experience.</h4>
+<h3>"Let Good Take Flight."</h3>
+
 
       
     

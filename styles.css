@@ -1,0 +1,14 @@
+h2 {font-family: Tahoma;}
+h3 {font-family: Tahoma;}
+h4 {font-family: Tahoma;}
+form {font-family: Tahoma;}
+body {
+    background-image: url("bg2.png");
+    background-color: #cccccc;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    
+   }

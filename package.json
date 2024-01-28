@@ -1,0 +1,15 @@
+{
+  "name": "turbulence-predictor",
+  "version": "1.0.0",
+  "description": "TODO\r Frontend website - 2 pages \\\r     front page - enter your flight number input box \\\r     second page - dynamic (or static) map displaying the path and the turbulence zones \\",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "^21.9.0"
+  }
+}

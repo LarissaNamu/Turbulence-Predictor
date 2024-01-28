@@ -1,3 +1,4 @@
+
 function getData(form) {
     var formData = new FormData(form);
   
@@ -6,15 +7,20 @@ function getData(form) {
     }
   
     console.log(Object.fromEntries(formData));
-    
     a = Object.fromEntries(formData);
-    flyNum = Object.values(a);
-    //console.log(flyNum[0]);
-    return flyNum[0]  //returns flight number
+    flyn = Object.values(a);
+    return "https://www.flightaware.com/live/flight/AAL" + flyn[0];
   }
-  
-  document.getElementById("myForm").addEventListener("submit", function (e) {
+
+
+document.getElementById("myForm").addEventListener("submit", function (e) {
     e.preventDefault();
     getData(e.target);
-  });
+    
+    
+});
+
+
+
+
 

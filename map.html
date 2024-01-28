@@ -28,40 +28,33 @@
     var set_longitude = 37.44; // set longitude for default map view
     var set_latitude = -92.48; // set latitude for default map view
 
-    var starting_longitude = 51.505; // set longitude for starting airport
-    var starting_latitude = -0.08; // set latitude for starting airport
-    var ending_longitude = 51.505; // set longitude for ending airport
-    var ending_latitude = -1; // set latitude for ending airport
-
-    var light_turbulence_longitude = 51.505; // set longitude for light turbulence
-    var light_turbulence_latitude = -2; // set latitude for light turbulence
-    var medium_turbulence_longitude = 51.505; // set longitude for medium turbulence
-    var medium_turbulence_latitude = -0.75; // set latitude for medium turbulence
-    var heavy_turbulence_longitude = 51.505; // set longitude for heavy turbulence
-    var heavy_turbulence_latitude = -0.9; // set latitude for heavy turbulence
+    var starting_longitude = 32.9; // set longitude for starting airport
+    var starting_latitude = -97.0405; // set latitude for starting airport
+    var ending_longitude = 41.98; // set longitude for ending airport
+    var ending_latitude = -87.91; // set latitude for ending airport
 
     var map = L.map('map').setView([set_longitude, set_latitude], 6);
     
     var greenIcon = L.icon({
         iconUrl: 'starting.png',
-        iconSize:     [30, 30], // size of the icon
+        iconSize: [30, 30], // size of the icon
     });
 
     var redIcon = L.icon({
         iconUrl: 'ending.png',
-        iconSize:     [30, 30], // size of the icon
+        iconSize: [30, 30], // size of the icon
     });
 
     // flight path
     // var DFWMarker = L.marker([32.9, -97.0405]).addTo(map);
     // var ORDMarker = L.marker([41.98, -87.91]).addTo(map);
-    L.marker([32.9, -97.0405], {icon: greenIcon}).addTo(map).bindPopup("Starting Airport");
-    L.marker([41.98, -87.91], {icon: redIcon}).addTo(map).bindPopup("Ending Airport");
+    L.marker([starting_longitude, starting_latitude], {icon: greenIcon}).addTo(map).bindPopup("Starting Airport");
+    L.marker([ending_longitude, ending_latitude], {icon: redIcon}).addTo(map).bindPopup("Ending Airport");
 
     // flight path
     var FlightPath = L.polygon([
-    [32.9, -97.0405],
-    [41.98, -87.91]
+    [starting_longitude, starting_latitude],
+    [ending_longitude, ending_latitude]
     ]).addTo(map);
 
     // airport highlight variable
@@ -78,6 +71,30 @@
     [-87.88082086,41.99495639],[-87.88469975,41.99480386],[-87.88476816,41.99802215],[-87.89108248,41.99941517],[-87.88939957,42.00052855],[-87.88937905,42.00300943],[-87.89169133,42.00403124],[-87.89500926,42.00405666],[-87.8950161,42.00459044],[-87.89513924,42.00483445],[-87.89562495,42.00502254],[-87.89608357,42.00514008]]]},"id":"b824e66c-c496-49dd-a1e2-f68d60da6d70","properties":{"name":"ORD Airport"}}]}
 
     L.geoJSON(Airports).addTo(map) // adding airport highlights to map
+
+    //subdivision
+    distance = Math.sqrt((ending_longitude - starting_longitude)**2 + (ending_latitude - starting_latitude)**2 );
+    slope = (ending_latitude - starting_latitude) / (ending_longitude - starting_longitude);
+    multiplier = distance / 25;
+    
+    turbulence_range = [25, 25, 26.25, 27.5, 28.75, 57.5, 56.25, 25, 23.75, 22.5, 22.10714286, 24.21428571, 26.32142857, 28.42857143, 29.28571429, 31.39285714, 32.25, 33.10714286, 53.96428571, 34.82142857, 35.67857143, 36.53571429, 37.39285714, 38.25];
+
+    for (i = 0; i < 25; i++) {
+        var lat = starting_latitude + (i * multiplier);
+        var long = starting_longitude + (i * multiplier);
+        if (long >= ending_longitude || lat >= ending_latitude) {
+            break;
+        }
+        if (turbulence_range[i] <= 55) {
+            continue;
+        }
+        else if (turbulence_range[i] <= 145 && turbulence_range[i] > 55) {
+            L.circle([long, lat], {color: 'yellow',fillColor: '#FFFF00',fillOpacity: 0.5,radius: 37000}).addTo(map);
+        }
+        else if (turbulence_range[i] >= 146) {
+            L.circle([long, lat], {color: 'red',fillColor: '#f03',fillOpacity: 0.5,radius: 37000}).addTo(map);
+        }
+    }
 
     // watermark
     L.Control.Watermark = L.Control.extend({
@@ -96,9 +113,5 @@
 
         L.control.watermark().addTo(map);
 
-    var light_circle = L.circle([light_turbulence_longitude, light_turbulence_latitude], {radius: 5000}).addTo(map);
-    var medium_circle = L.circle([light_turbulence_longitude, light_turbulence_latitude], {radius: 5000}).addTo(map);
-    var heavy_circle = L.circle([light_turbulence_longitude, light_turbulence_latitude], {radius: 5000}).addTo(map);
-    
     L.tileLayer('https://api.maptiler.com/maps/streets-v2/{z}/{x}/{y}.png?key=EqaU7EvvYtANunDniLZM', {attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>', }).addTo(map);
 </script>

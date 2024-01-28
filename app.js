@@ -22,12 +22,26 @@
 
 function redirect() {
   var answergiven = document.getElementById("answergiven");
-  var realanswer = document.getElementById("first");
+  var realanswer1 = document.getElementById("first");
   var nextpage1 = document.getElementById("nextpage1");
+  var realanswer2 = document.getElementById("second");
+  var nextpage2 = document.getElementById("nextpage2");
+  var realanswer3 = document.getElementById("third");
+  var nextpage3 = document.getElementById("nextpage3");
 
-  if(answergiven.value == realanswer.value){
+  if(answergiven.value == realanswer1.value){
       window.location = nextpage1.value;
+      return false;
   }
+  if(answergiven.value == realanswer2.value){
+    window.location = nextpage2.value;
+    return false;
+  }
+  if(answergiven.value == realanswer3.value){
+    window.location = nextpage3.value;
+    return false;
+  }
+  
   else{
       alert('Please enter a valid flight number.');
   }
